@@ -1,0 +1,18 @@
+<button mat-icon-button (click)="back()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<h1 class="u-title" data-cy="create-shipment-form-title">Create Shipment</h1>
+
+<app-shipments-form [form]="form">
+  <button
+    class="button-primary"
+    data-cy="create-shipment-btn"
+    [disabled]="form.invalid"
+    (click)="createShipment()"
+  >
+    Create
+    <mat-icon *ngIf="isLoading$ | async"
+      ><mat-spinner diameter="20"> </mat-spinner
+    ></mat-icon>
+  </button>
+</app-shipments-form>

@@ -1,1 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./styles/variables";
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.u-title {
+  font-weight: 600;
+  font-size: 34px !important;
+}
+
+.list-item {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  &--image img {
+    width: 50px;
+    height: 50px;
+  }
+
+  &--content {
+    display: flex;
+    flex: 0.9;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 10px;
+  }
+  &--button {
+    cursor: pointer;
+    border: 0;
+    border-radius: 7px;
+    padding: 10px;
+  }
+}
+
+.button-primary {
+  appearance: none;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 30px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  justify-content: center;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 12px 28px;
+  text-align: center;
+  &[disabled] {
+    background-color: gray;
+  }
+
+  &-small {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  mat-icon {
+    margin-left: 1rem;
+  }
+}

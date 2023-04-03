@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  height: 100%;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  height: 100%;
+}
+table {
+  width: 100%;
+  box-shadow: none;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-details {
+  overflow: hidden;
+}
+
+.empty-state {
+  display: flex;
+  padding: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  button {
+    width: 25%;
+  }
+}
+
+.empty-state-title {
+  margin-bottom: 2rem;
+  font-size: 32px;
+}

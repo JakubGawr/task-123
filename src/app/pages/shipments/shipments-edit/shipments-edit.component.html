@@ -1,0 +1,13 @@
+<button mat-icon-button (click)="back()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<h1 class="u-title">Edit Shipment</h1>
+
+<app-shipments-form *ngIf="form" [form]="form">
+  <button class="button-primary" [disabled]="form.invalid" (click)="update()">
+    Edit
+    <mat-icon *ngIf="isLoading$ | async"
+      ><mat-spinner diameter="20"> </mat-spinner
+    ></mat-icon>
+  </button>
+</app-shipments-form>

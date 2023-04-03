@@ -1,0 +1,94 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Company name</mat-label>
+    <input
+      data-cy="create-shipment-form-name"
+      formControlName="name"
+      matInput
+    />
+    <mat-error *ngIf="nameCtrl?.invalid">
+      <span>This field is mandatory.</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Scheduled shipment date</mat-label>
+    <input formControlName="shipDate" matInput [matDatepicker]="picker" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Ship status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option [value]="shipStatus.CREATED">{{
+        shipStatus.CREATED
+      }}</mat-option>
+      <mat-option [value]="shipStatus.PREPEND">{{
+        shipStatus.PREPEND
+      }}</mat-option>
+      <mat-option [value]="shipStatus.SHIPPED">{{
+        shipStatus.SHIPPED
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Select Warehouse</mat-label>
+    <input
+      type="text"
+      placeholder="Pick one"
+      aria-label="Number"
+      data-cy="create-shipment-form-autocomplete"
+      matInput
+      [formControl]="autoCompleteControl"
+      [matAutocomplete]="auto"
+    />
+
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="onSelectedOption($event)"
+      [displayWith]="displayWith"
+    >
+      <mat-option *ngFor="let item of warehouseList$ | async" [value]="item">
+        <app-list-item
+          data-cy="create-shipment-form-autocomplete-item"
+          [showActionBtn]="false"
+          [showDescription]="false"
+          [item]="item"
+        >
+        </app-list-item>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <div formArrayName="warehouseItems" class="warehouseItems">
+    <h2 *ngIf="wareHouseFormArray.controls.length > 0">Warehouse Items</h2>
+    <div
+      [formGroupName]="i"
+      *ngFor="let control of wareHouseFormArray.controls; index as i"
+    >
+      <div class="list-item">
+        <div class="list-item--image">
+          <img
+            [src]="control.get('imageUrl')?.value"
+            alt="warehouse-item-image"
+          />
+        </div>
+        <div class="list-item--content">
+          <span
+            ><b>{{ control.get("name")?.value }}</b></span
+          >
+        </div>
+
+        <span>{{ control.get("unitPrice")?.value | currency: "EUR" }}</span>
+
+        <mat-form-field appearance="outline" class="edit-quantity-field">
+          <mat-label>Warehouse quantity</mat-label>
+          <input formControlName="quantity" matInput type="number" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</form>
